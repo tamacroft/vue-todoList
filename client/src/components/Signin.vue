@@ -6,6 +6,9 @@
           <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
         <v-container>
+          <v-alert type="error" :value="showAlert" dismissable>
+            asdas
+          </v-alert>
           <v-form v-model="valid" @submit.prevent="login()">
             <v-text-field
               label="Username"
@@ -38,7 +41,7 @@ export default {
       valid: false,
       username: '',
       password: '',
-      error: undefined,
+      showAlert: false,
       usernameRules: [
         v => !!v || 'Username wajib diisi.',
         v => v.length >= 5 || 'Username wajib diisi.',
@@ -57,10 +60,10 @@ export default {
             username: this.username,
             password: this.password,
           });
-          if (user.data) {
-            console.log('Login Berhasil');
+          if (user.token) {
+            localStorage.setItem('token', user.token);
           } else {
-            console.log('Gagal login');
+            this.showAlert = true;
           }
         } catch (err) {
           throw new Error(err);
