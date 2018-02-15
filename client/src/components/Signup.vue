@@ -68,6 +68,7 @@ export default {
             fullname: this.fullname,
             password: this.password,
           });
+          this.$router.push('/login');
         } catch (error) {
           throw new Error(error);
         }
