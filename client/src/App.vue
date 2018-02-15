@@ -13,7 +13,6 @@
       </v-toolbar>
 
       <main>
-        {{ menuLogin }}
         <v-container fluid>
           <router-view></router-view>
         </v-container>
@@ -33,7 +32,8 @@ export default {
       this.$router.push(route);
     },
     logout() {
-      // sad
+      localStorage.clear();
+      window.location = '/';
     },
   },
   computed: {
