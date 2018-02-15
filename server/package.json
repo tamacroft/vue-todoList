@@ -1,0 +1,27 @@
+{
+  "name": "todo-list-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Hadi Hidayat Hammurabi <didikipb007@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js --exec 'yarn lint && node'",
+    "lint": "eslint **/*.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "joi": "^13.1.2",
+    "mongoose": "^5.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.14.12"
+  }
+}
