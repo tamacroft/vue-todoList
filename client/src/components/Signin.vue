@@ -6,8 +6,8 @@
           <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
         <v-container>
-          <v-alert type="error" :value="showAlert" dismissable>
-            asdas
+          <v-alert type="error" :value="error.show" dismissible>
+            {{ error.message }}
           </v-alert>
           <v-form v-model="valid" @submit.prevent="login()">
             <v-text-field
@@ -41,7 +41,7 @@ export default {
       valid: false,
       username: '',
       password: '',
-      showAlert: false,
+      error: {},
       usernameRules: [
         v => !!v || 'Username wajib diisi.',
         v => v.length >= 5 || 'Username wajib diisi.',
@@ -62,14 +62,23 @@ export default {
           });
           if (user.token) {
             localStorage.setItem('token', user.token);
+            window.location = '/';
           } else {
-            this.showAlert = true;
+            this.error = {
+              show: true,
+              message: user.response.data.message,
+            };
           }
         } catch (err) {
           throw new Error(err);
         }
       }
     },
+  },
+  beforeCreate() {
+    if (localStorage.getItem('token')) {
+      this.$router.push('/');
+    }
   },
 };
 </script>
