@@ -30,12 +30,15 @@
 </template>
 
 <script>
+import services from '../services';
+
 export default {
   data() {
     return {
       valid: false,
       username: '',
       password: '',
+      error: undefined,
       usernameRules: [
         v => !!v || 'Username wajib diisi.',
         v => v.length >= 5 || 'Username wajib diisi.',
@@ -47,9 +50,21 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       if (this.valid) {
-        // sad
+        try {
+          const user = await services.auth({
+            username: this.username,
+            password: this.password,
+          });
+          if (user.data) {
+            console.log('Login Berhasil');
+          } else {
+            console.log('Gagal login');
+          }
+        } catch (err) {
+          throw new Error(err);
+        }
       }
     },
   },
