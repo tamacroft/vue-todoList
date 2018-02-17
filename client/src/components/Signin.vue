@@ -61,7 +61,7 @@ export default {
             password: this.password,
           });
           if (user.token) {
-            localStorage.setItem('token', user.token);
+            this.$store.dispatch('token', user.token);
             window.location = '/';
           } else {
             this.error = {
