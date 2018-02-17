@@ -25,12 +25,13 @@
               <template v-for="todo in todos">
                 <v-list-tile :key="todo._id">
                   <v-list-tile-action>
-                    <v-checkbox
-                      @change="changeTodo(todo.id)"
-                    ></v-checkbox>
+                    <input type="checkbox"
+                      :checked="todo.completed ? 'checked':''"
+                      @change="changeTodo(todo._id)"
+                    />
                   </v-list-tile-action>
                   <v-list-tile-content>
-                    {{ todo.title }}
+                    <span :class="todo.completed ? 'completed':''">{{ todo.title }}</span>
                   </v-list-tile-content>
                   <v-list-tile-action>
                     <v-btn icon class="red--text">
@@ -58,14 +59,21 @@ export default {
     };
   },
   methods: {
-    // async changeTodo() {
-    // },
+    async changeTodo(id) {
+      console.log(id);
+      try {
+        await services.todo.put(id);
+        this.todos = (await services.todo.get()).data;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
     async addTodo(evt) {
       if (evt.keyCode === 13) {
         try {
           await services.todo.post(this.newtodo);
-          this.todos = (await services.todo.get()).data;
           this.newtodo = null;
+          this.todos = (await services.todo.get()).data;
         } catch (error) {
           throw new Error(error);
         }
@@ -84,3 +92,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .completed{
+    text-decoration: line-through;
+    color: #aaa;
+  }
+</style>

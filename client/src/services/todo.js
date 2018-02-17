@@ -33,6 +33,17 @@ const todo = {
       return error;
     }
   },
+  async put(id) {
+    try {
+      return await axios.put(`/todos/${id}`, null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 };
 
 export default todo;
