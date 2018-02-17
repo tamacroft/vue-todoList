@@ -11,7 +11,7 @@ module.exports = (app) => {
     }
   })
 
-  app.post('/todos', todo.header, todo.todo, async (req, res) => {
+  app.post('/todos', todo.header, todo.post, async (req, res) => {
     try {
       const todo = await Todo.create({
         title: req.body.title,
@@ -21,6 +21,22 @@ module.exports = (app) => {
       res.status(200).json(todo)
     } catch (err) {
       res.status(500).json(err)
+    }
+  })
+
+  app.put('/todos/:id', todo.header, todo.put, async (req, res) => {
+    try {
+      const todo = await Todo.findOne({_id: req.params.id})
+      if (todo) {
+        try {
+          const update = await Todo.findByIdAndUpdate(req.params.id, {completed: !todo.completed})
+          res.status(200).json(update)
+        } catch (error) {
+          res.status(400).json(error)
+        }
+      }
+    } catch (error) {
+      res.status(400).json(error)
     }
   })
 }
