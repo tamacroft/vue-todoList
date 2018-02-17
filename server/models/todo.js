@@ -8,6 +8,10 @@ const schema = new mongoose.Schema({
   completed: {
     type: Boolean,
     required: true
+  },
+  userId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true
   }
 }, {
   collection: 'todos'
