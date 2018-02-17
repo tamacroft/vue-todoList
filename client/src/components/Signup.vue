@@ -76,7 +76,7 @@ export default {
     },
   },
   beforeCreate() {
-    if (localStorage.getItem('token')) {
+    if (this.$store.getters.token) {
       this.$router.push('/');
     }
   },

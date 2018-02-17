@@ -43,7 +43,18 @@ const todo = {
     } catch (error) {
       return error;
     }
-  }
+  },
+  async delete(id) {
+    try {
+      return await axios.delete(`/todos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  },
 };
 
 export default todo;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!token">
+    <div v-if="!$store.getters.token">
       <h3>Silakan klik menu login!</h3>
     </div>
     <div v-else>
@@ -15,11 +15,6 @@ export default {
   data() {
     return {
     };
-  },
-  computed: {
-    token() {
-      return this.$store.getters.token;
-    },
   },
 };
 </script>

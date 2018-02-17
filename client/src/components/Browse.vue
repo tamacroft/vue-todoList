@@ -21,6 +21,7 @@
             <v-toolbar-title>Your Todo List</v-toolbar-title>
           </v-toolbar>
           <v-container>
+            <div v-if="todos.length <= 0" class="text-xs-center">There is no item here.</div>
             <v-list>
               <template v-for="todo in todos">
                 <v-list-tile :key="todo._id">
@@ -34,7 +35,7 @@
                     <span :class="todo.completed ? 'completed':''">{{ todo.title }}</span>
                   </v-list-tile-content>
                   <v-list-tile-action>
-                    <v-btn icon class="red--text">
+                    <v-btn icon class="red--text" @click="removeTodo(todo._id)">
                       <v-icon>close</v-icon>
                     </v-btn>
                   </v-list-tile-action>
@@ -60,7 +61,6 @@ export default {
   },
   methods: {
     async changeTodo(id) {
-      console.log(id);
       try {
         await services.todo.put(id);
         this.todos = (await services.todo.get()).data;
@@ -80,7 +80,12 @@ export default {
       }
     },
     async removeTodo(id) {
-      
+      try {
+        await services.todo.delete(id);
+        this.todos = (await services.todo.get()).data;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
   async mounted() {
@@ -89,6 +94,9 @@ export default {
     } catch (error) {
       throw new Error(error);
     }
+  },
+  beforeCreate() {
+    if (!this.$store.getters.token) this.$router.push('/');
   },
 };
 </script>

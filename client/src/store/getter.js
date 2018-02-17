@@ -1,6 +1,9 @@
 const getter = {
   token(state) {
-    return state.token;
+    if (localStorage.getItem('token') === state.token) {
+      return state.token;
+    }
+    return null;
   },
 };
 
