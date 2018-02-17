@@ -4,7 +4,11 @@
       <v-flex xs6 offset-xs3>
         <div class="white elevation-2">
           <v-container>
-            sad
+            <v-text-field
+              label="What will you do?"
+              v-model="newtodo"
+              @keyup="addTodo($event)"
+            ></v-text-field>
           </v-container>
         </div>
       </v-flex>
@@ -37,14 +41,28 @@ export default {
   data() {
     return {
       todos: {},
+      newtodo: null,
     };
   },
   methods: {
     // async changeTodo() {
     // },
+    async addTodo(evt) {
+      if (evt.keyCode === 13) {
+        try {
+          console.log(await services.todo.post(this.newtodo));
+        } catch (error) {
+          throw new Error(error);
+        }
+      }
+    },
   },
   async mounted() {
-    this.todos = (await services.todo.get()).data;
+    try {
+      this.todos = (await services.todo.get()).data;
+    } catch (error) {
+      throw new Error(error);
+    }
   },
 };
 </script>

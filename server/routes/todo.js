@@ -1,17 +1,17 @@
 const { Todo } = require('../models')
-const { header, todo } = require('../policies')
+const { todo } = require('../policies')
 
 module.exports = (app) => {
-  app.get('/todos', header, async (req, res) => {
+  app.get('/todos', todo.header, async (req, res) => {
     try {
-      const todos = await Todo.find({userId: req.body.user.id})
+      const todos = await Todo.find({userId: req.body.userId})
       res.status(200).json(todos)
     } catch (err) {
       res.status(500).json(err)
     }
   })
 
-  app.post('/todos', todo, header, async (req, res) => {
+  app.post('/todos', todo.header, todo.todo, async (req, res) => {
     try {
       const todo = await Todo.create({
         title: req.body.title,

@@ -5,7 +5,11 @@ const todo = {
     let todos = {};
     if (!id) {
       try {
-        todos = await axios.get('/todos');
+        todos = await axios.get('/todos', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
       } catch (err) {
         return err;
       }
@@ -17,6 +21,17 @@ const todo = {
       }
     }
     return todos;
+  },
+  async post(newtodo) {
+    try {
+      return await axios.post('/todos', { title: newtodo, completed: false }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
   },
 };
 
