@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout>
-      <v-flex xs6 offset-xs3>
+      <v-flex md6 offset-md3>
         <div class="white elevation-2">
           <v-container>
             <v-text-field
@@ -15,7 +15,7 @@
     </v-layout>
     <br/>
     <v-layout>
-      <v-flex xs6 offset-xs3>
+      <v-flex md6 offset-md3>
         <div class="white elevation-2">
           <v-toolbar color="primary" dark>
             <v-toolbar-title>Your Todo List</v-toolbar-title>

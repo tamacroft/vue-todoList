@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
+    <v-flex md6 offset-md3>
       <div class="white elevation-2">
         <v-toolbar dark color="primary">
           <v-toolbar-title>Login</v-toolbar-title>
