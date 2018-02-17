@@ -61,8 +61,8 @@ export default {
             password: this.password,
           });
           if (user.token) {
-            this.$store.dispatch('token', user.token);
-            window.location = '/';
+            this.$store.dispatch('signin', user.token);
+            this.$router.push('/');
           } else {
             this.error = {
               show: true,
@@ -76,7 +76,7 @@ export default {
     },
   },
   beforeCreate() {
-    if (localStorage.getItem('token')) {
+    if (this.$store.getters.token) {
       this.$router.push('/');
     }
   },

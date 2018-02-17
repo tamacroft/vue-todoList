@@ -1,4 +1,5 @@
 module.exports = {
   register: require('./register'),
-  auth: require('./auth')
+  auth: require('./auth'),
+  todo: require('./todo')
 }

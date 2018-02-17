@@ -3,6 +3,6 @@ module.exports = {
   port: 8081,
   jwt: {
     secret: 'whoareyou?',
-    expires: 60 * 60
+    expires: 60 * 60 * 48
   }
 }

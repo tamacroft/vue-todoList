@@ -5,9 +5,11 @@
 </template>
 
 <script>
+import { todo } from '../services';
+
 export default {
   mounted() {
-    console.log(this.$store.getters.token);
+    console.log(todo);
   },
 };
 </script>

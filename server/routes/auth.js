@@ -18,7 +18,7 @@ module.exports = (app) => {
       if (user) {
         const valid = user.password === req.body.password
         if (valid) {
-          const token = require('jsonwebtoken').sign({ user },
+          const token = require('jsonwebtoken').sign({id: user.id, username: user.username, fullname: user.fullname},
             config.app.jwt.secret,
             { expiresIn: config.app.jwt.expires })
           res.status(200).json({token})

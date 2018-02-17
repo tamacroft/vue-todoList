@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     token() {
-      return localStorage.getItem('token');
+      return this.$store.getters.token;
     },
   },
 };
