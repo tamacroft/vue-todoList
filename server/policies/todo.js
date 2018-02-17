@@ -21,7 +21,7 @@ const todoPolicy = {
   },
   post: async (req, res, next) => {
     const schema = Joi.object().keys({
-      title: Joi.string().alphanum().min(5).max(15).required(),
+      title: Joi.string().required(),
       completed: Joi.boolean().required(),
       userId: Joi.string().required()
     })

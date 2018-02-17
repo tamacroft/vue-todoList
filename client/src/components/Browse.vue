@@ -81,7 +81,7 @@ export default {
     },
     async removeTodo(id) {
       
-    }
+    },
   },
   async mounted() {
     try {

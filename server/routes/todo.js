@@ -39,4 +39,13 @@ module.exports = (app) => {
       res.status(400).json(error)
     }
   })
+
+  app.delete('/todos/:id', todo.header, todo.put, async (req, res) => {
+    try {
+      const remove = await Todo.findByIdAndRemove(req.params.id)
+      res.status(200).json(remove)
+    } catch (error) {
+      res.status(400).json(error)
+    }
+  })
 }
