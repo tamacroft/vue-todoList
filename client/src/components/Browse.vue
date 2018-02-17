@@ -21,11 +21,24 @@
             <v-toolbar-title>Your Todo List</v-toolbar-title>
           </v-toolbar>
           <v-container>
-            <v-list v-for="todo in todos" :key="todo._id">
-              <v-checkbox
-                :label="todo.title"
-                @change="changeTodo(todo._id)"
-              ></v-checkbox>
+            <v-list>
+              <template v-for="todo in todos">
+                <v-list-tile :key="todo._id">
+                  <v-list-tile-action>
+                    <v-checkbox
+                      @change="changeTodo(todo.id)"
+                    ></v-checkbox>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                    {{ todo.title }}
+                  </v-list-tile-content>
+                  <v-list-tile-action>
+                    <v-btn icon class="red--text">
+                      <v-icon>close</v-icon>
+                    </v-btn>
+                  </v-list-tile-action>
+                </v-list-tile>
+              </template>
             </v-list>
           </v-container>
         </div>
@@ -50,12 +63,17 @@ export default {
     async addTodo(evt) {
       if (evt.keyCode === 13) {
         try {
-          console.log(await services.todo.post(this.newtodo));
+          await services.todo.post(this.newtodo);
+          this.todos = (await services.todo.get()).data;
+          this.newtodo = null;
         } catch (error) {
           throw new Error(error);
         }
       }
     },
+    async removeTodo(id) {
+      
+    }
   },
   async mounted() {
     try {
